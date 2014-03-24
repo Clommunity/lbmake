@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl "https://codeload.github.com/agustim/avahi-ps/zip/master" > avahi-ps.zip
+curl "https://codeload.github.com/Clommunity/avahi-ps/zip/master" > avahi-ps.zip
 unzip avahi-ps.zip
 cd avahi-ps-master
 make install

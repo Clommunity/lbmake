@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl "https://codeload.github.com/agustim/cDistro/zip/master" > cDistro.zip
+curl "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
 unzip cDistro.zip
 cd cDistro-master
 make install
