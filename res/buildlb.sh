@@ -6,7 +6,7 @@
 GP=/var/www/
 IMAGE_PATH=images
 WORKSPACE=lbmake
-REPOSITORY=https://github.com/agustim/lbmake
+REPOSITORY=https://github.com/Clommunity/lbmake
 IMAGE_NAME=cloudy
 IMAGE_EXT=iso
 LBIMAGE_NAME=binary.hybrid.iso
