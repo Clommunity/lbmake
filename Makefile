@@ -6,11 +6,11 @@ IMAGE ?= iso-hybrid # or iso, hdd, tar or netboot
 INSTALL ?= live # or businesscard, netinst, cdrom...
 AREAS ?= "main contrib" # non-free
 CPATH ?= /var/lib/lxc
-CNAME ?= gcodis
+CNAME ?= cloudy
 MACGEN ?= $(shell echo $$(date +%N))
 MACADDR ?= $(shell echo $$(echo ${MACGEN}|md5sum|sed 's/^\(..\)\(..\)\(..\)\(..\)\(..\).*$$/02:\1:\2:\3:\4:\5/'))
 ROOTPWD ?= root
-MACHINENAME ?= gcodis
+MACHINENAME ?= cloudy
 CEXTENSION ?= container.tar.gz
 
 GET_KEY := curl -s 'http://pgp.mit.edu/pks/lookup?op=get&search=0xKEY_ID' | sed -n '/^-----BEGIN/,/^-----END/p'
