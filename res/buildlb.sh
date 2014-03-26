@@ -11,8 +11,8 @@ IMAGE_NAME=cloudy
 IMAGE_EXT=iso
 LBIMAGE_NAME=binary.hybrid.iso
 LBWORKSPACE=devel
-USER=repo
-GROUP=repo
+USER=www-data
+GROUP=www-data
 SUBDIR=unstable
 BACKUPDAYS=7
 
@@ -41,7 +41,7 @@ clean_workspace(){
 
 make_workspace(){
 	cd ${GP}${WORKSPACE} && make all	
-#	cd ${GP}${WORKSPACE} && CNAME=${IMAGE_NAME} make container_tar
+	cd ${GP}${WORKSPACE} && CNAME=${IMAGE_NAME} make container_tar
 }
 
 make_readme(){
@@ -72,7 +72,10 @@ md5_compare(){
 # Make image
 ACTIMG=${GP}${IMAGE_PATH}/${SUBDIR}/${IMAGE_NAME}.${IMAGE_EXT}
 ACTREADME=${GP}${IMAGE_PATH}/${SUBDIR}/${IMAGE_NAME}.README
+ACTCONTAINER=${GP}${IMAGE_PATH}/${SUBDIR}/${IMAGE_NAME}.container.tar.gz
 BUILDIMG=${GP}${WORKSPACE}/${LBWORKSPACE}/${LBIMAGE_NAME}
+BUILDCONTAINER=${GP}${WORKSPACE}/${LBWORKSPACE}/${IMAGE_NAME}.container.tar.gz
+
 
 make_dirs
 [ -d "${GP}${WORKSPACE}" ] && clean_workspace
@@ -85,12 +88,15 @@ then
 	TIMEFILE=${TIMEFILE:0:8}
 	OLDIMG=${GP}${IMAGE_PATH}/${SUBDIR}/old/${IMAGE_NAME}.${TIMEFILE}.${IMAGE_EXT}
 	OLDREADME=${GP}${IMAGE_PATH}/${SUBDIR}/old/${IMAGE_NAME}.${TIMEFILE}.README
+	OLDCONTAINER=${GP}${IMAGE_PATH}/${SUBDIR}/old/${IMAGE_NAME}.${TIMEFILE}.container.tar.gz
 	
 	mv ${ACTIMG} ${OLDIMG}
 	mv ${ACTREADME} ${OLDREADME}
+	mv ${ACTCONTAINER} ${OLDCONTAINER}
 fi
 
 cp ${BUILDIMG} ${ACTIMG}	
+cp ${BUILDCONTAINER} ${ACTCONTAINER}
 make_readme ${ACTIMG} > ${ACTREADME}
 
 chown -R ${USER}:${GROUP} ${GP}${IMAGE_PATH}
@@ -98,7 +104,7 @@ chown -R ${USER}:${GROUP} ${GP}${IMAGE_PATH}
 # Purge files
 OLDPATH=${GP}${IMAGE_PATH}/${SUBDIR}/old/
 
-for i in $( ls ${OLDPATH}*.iso ${OLDPATH}*.README| grep -v "$(ls -St ${OLDPATH}*.iso|head -n ${BACKUPDAYS}|sed -e 's/\.iso//')"); 
+for i in $( ls ${OLDPATH}*.iso ${OLDPATH}*.README ${OLDPATH}*.container.tar.gz| grep -v "$(ls -St ${OLDPATH}*.iso|head -n ${BACKUPDAYS}|sed -e 's/\.iso//')"); 
 do 
 	rm -f $i 
 done
