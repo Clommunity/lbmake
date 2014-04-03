@@ -2,6 +2,10 @@
 
 Build and package the Clommunity distro
 
+## Pre
+
+	apt-get install build-essential live-build image-magick curl debootstrap git unzip 
+
 ## Build
 
 	sudo make
