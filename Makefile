@@ -155,7 +155,7 @@ container_configure: container_savefiles
 
 	# First boot will create ssh keys
 	# Clear keys
-	rm ${CPATH}/${CNAME}/rootfs/etc/ssh/ssh_host_*
+	rm -f ${CPATH}/${CNAME}/rootfs/etc/ssh/ssh_host_*
 	# Reconfigure keys
 	sed -i 's%^getinconf%[ ! -f /etc/ssh/ssh_host_dsa_key ] \&\& dpkg-reconfigure openssh-server\ngetinconf%' ${CPATH}/${CNAME}/rootfs/etc/rc.local 
 
