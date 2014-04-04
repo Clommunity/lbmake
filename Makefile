@@ -129,7 +129,7 @@ container_configure: container_savefiles
 	echo "root:${ROOTPWD}" | chroot ${CPATH}/${CNAME}/rootfs/ chpasswd
 	echo "${MACHINENAME}" > ${CPATH}/${CNAME}/rootfs/etc/hostname
 	mkdir -p ${CPATH}/${CNAME}/rootfs/dev/net
-	chroot ${CPATH}/${CNAME}/rootfs/ /bin/mknod /dev/net/tun c 10 200
+	chroot ${CPATH}/${CNAME}/rootfs/ /bin/bash -c '[ ! -f /dev/net/tun ] &&  /bin/mknod /dev/net/tun c 10 200'
 
 	# Config interfaces
 	printf "\n auto eth0\niface eth0 inet dhcp\n" >> ${CPATH}/${CNAME}/rootfs/etc/network/interfaces
@@ -155,7 +155,7 @@ container_configure: container_savefiles
 
 	# First boot will create ssh keys
 	# Clear keys
-	rm ${CPATH}/${CNAME}/rootfs/etc/ssh_host_*
+	rm ${CPATH}/${CNAME}/rootfs/etc/ssh/ssh_host_*
 	# Reconfigure keys
 	sed -i 's%^getinconf%[ ! -f /etc/ssh/ssh_host_dsa_key ] \&\& dpkg-reconfigure openssh-server\ngetinconf%' ${CPATH}/${CNAME}/rootfs/etc/rc.local 
 
