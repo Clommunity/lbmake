@@ -10,4 +10,36 @@ n
 EOF
  
 # Execute first time.
-sed -i -e 's/^exit 0/getinconf-client install\nexit 0/' /etc/rc.local
+#sed -i -e 's/^exit 0/getinconf-client install\nexit 0/' /etc/rc.local
+
+cat > /etc/rc.local << EOF
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+getinconf-client install
+DEVICE="eth0"
+IP=\$(ip addr show dev \${DEVICE}|grep "inet "|sed 's/.* \([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\).*/\1/')
+ISSUE=/etc/issue
+
+
+echo 'Debian GNU/Linux 7 \\\\n \\\\l' > \${ISSUE}
+echo 'Welcome to' >> \${ISSUE}
+echo '_________ .__                   .___'  >> \${ISSUE}
+echo '\\\_   ___ \\\|  |   ____  __ __  __| _/__.__.' >> \${ISSUE}
+echo '/    \\\  \\\/|  |  /  _ \\\|  |  \\\/ __ <   |  |' >> \${ISSUE}
+echo '\\\     \\\___|  |_(  <_> )  |  / /_/ |\\\___  |' >> \${ISSUE}
+echo ' \\\______  /____/\\\____/|____/\\\____ |/ ____|' >> \${ISSUE}
+echo '        \\\/                       \\\/\\\/     ' >> \${ISSUE}
+echo "\nPlease connect http://\${IP}:7000/ with\nyour web browser to configure this server.\n"  >> \${ISSUE} 
+exit 0
+EOF
