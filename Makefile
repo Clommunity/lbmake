@@ -37,8 +37,8 @@ build_environment:
 	cp res/auto/* ${DESTDIR}/auto/
 
 prepare_configure: build_environment
-	echo 'lb config noauto \
 		#Workaround while the expired repository's key is not renewed:
+	echo 'lb config noauto \
 		--apt-options "--yes --force-yes" \
 		--binary-images ${IMAGE} \
 		--architectures ${ARCH} \
