@@ -38,6 +38,8 @@ build_environment:
 
 prepare_configure: build_environment
 	echo 'lb config noauto \
+		#Workaround while the expired repository's key is not renewed:
+		--apt-options "--yes --force-yes" \
 		--binary-images ${IMAGE} \
 		--architectures ${ARCH} \
 		--linux-flavours ${FLAVOUR} \

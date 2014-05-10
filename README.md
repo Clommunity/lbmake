@@ -4,7 +4,7 @@ Build and package the Clommunity distro
 
 ## Pre
 
-	apt-get install build-essential live-build image-magick curl debootstrap git unzip 
+	apt-get install build-essential live-build imagemagick curl debootstrap git unzip 
 
 ## Build
 
