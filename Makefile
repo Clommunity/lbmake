@@ -59,7 +59,7 @@ add_repos: make_config
 	echo "deb http://ftp.debian.org/debian wheezy-backports ${AREAS}" > ${ARCHDIR}/backports.list.chroot
 	# Add Clommuntiy Repo 
 	echo "deb http://repo.clommunity-project.eu/debian unstable/" > ${ARCHDIR}/gcodis.list.chroot
-	$(subst KEY_ID,8AE35B96C3FD5CD9, ${GET_KEY}) > ${ARCHDIR}/gcodis.key.chroot
+	$(subst KEY_ID,A59C5DC8, ${GET_KEY}) > ${ARCHDIR}/gcodis.key.chroot
 	# Add Guifi Repo
 	echo "deb http://serveis.guifi.net/debian guifi/" > ${ARCHDIR}/serveis.list.chroot
 	$(subst KEY_ID,2E484DAB, ${GET_KEY}) > ${ARCHDIR}/serveis.key.chroot
