@@ -150,7 +150,10 @@ container_configure: container_savefiles
 	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "chown -R mysql /var/lib/mysql"
 
 	#Change /dev/null permisions
-	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "chmod 666 /dev/null"	
+	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "chmod 666 /dev/null"
+
+	#Fixed /dev/shm to use in some scenarios
+	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "rm -f /dev/shm; mkdir /dev/shm"	
 
 	#Make a apt-get update
 	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "apt-get update"		
