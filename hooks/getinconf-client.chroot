@@ -40,6 +40,8 @@ echo '\\\\\\\\     \\\\\\\\___|  |_(  <_> )  |  / /_/ |\\\\\\\\___  |' >> \${ISS
 echo ' \\\\\\\\______  /____/\\\\\\\\____/|____/\\\\\\\\____ |/ ____|' >> \${ISSUE}
 echo '        \\\\\\\\/                       \\\\\\\\/\\\\\\\\/     ' >> \${ISSUE}
 echo "\nPlease open http://\${IP}:7000/ with\nyour web browser to configure this server.\n"  >> \${ISSUE} 
+
+getinconf-client install
+
 exit 0
 EOF
-getinconf-client install
