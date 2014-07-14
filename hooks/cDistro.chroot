@@ -8,3 +8,10 @@ cd ..
 rm -rf cDistro-master cDistro.zip
 sed -i -e 's/BINDIP="127.0.0.1"/BINDIP="0.0.0.0"/' /etc/cdistro.conf
 update-rc.d cdistro defaults
+
+# Update info
+COMMUNITY=Clommunity
+REPOSITORY=cDistro
+mkdir -p /etc/cloudy
+curl -s https://api.github.com/repos/$COMMUNITY/$REPOSITORY/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${COMMUNITY}-${REPOSITORY}.sha
+
