@@ -1,11 +1,5 @@
 #!/bin/sh
 
-[ ! -z "$REV" ] && {
-case $REV in
-	pattern )
-		;;
-esac
-}
 curl "https://codeload.github.com/Clommunity/avahi-ps/zip/master" > avahi-ps.zip
 unzip avahi-ps.zip
 cd avahi-ps-master
