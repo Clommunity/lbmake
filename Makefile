@@ -2,6 +2,7 @@
 DESTDIR ?= devel
 ARCH ?= i386
 FLAVOUR ?= 686-pae
+DISTRIBUTION ?= wheezy
 IMAGE ?= iso-hybrid # or iso, hdd, tar or netboot
 INSTALL ?= live # or businesscard, netinst, cdrom...
 AREAS ?= "main contrib" # non-free
@@ -42,6 +43,7 @@ prepare_configure: build_environment
 		--apt-options "--yes --force-yes" \
 		--binary-images ${IMAGE} \
 		--architectures ${ARCH} \
+		--distribution ${DISTRIBUTION} \
 		--linux-flavours ${FLAVOUR} \
 		--debian-installer ${INSTALL} \
 		--archive-areas ${AREAS} \
@@ -56,7 +58,7 @@ add_repos: make_config
 	which curl >/dev/null
 	mkdir -p ${ARCHDIR}
 	# Add Backports Repo
-	echo "deb http://ftp.debian.org/debian wheezy-backports ${AREAS}" > ${ARCHDIR}/backports.list.chroot
+	echo "deb http://ftp.debian.org/debian ${DISTRIBUTION}-backports ${AREAS}" > ${ARCHDIR}/backports.list.chroot
 	# Add Clommuntiy Repo 
 	echo "deb http://repo.clommunity-project.eu/debian unstable/" > ${ARCHDIR}/cloudy.list.chroot
 	$(subst KEY_ID,A59C5DC8, ${GET_KEY}) > ${ARCHDIR}/cloudy.key.chroot
