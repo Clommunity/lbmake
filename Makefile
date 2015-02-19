@@ -133,7 +133,7 @@ container_configure: container_savefiles
 	echo "root:${ROOTPWD}" | chroot ${CPATH}/${CNAME}/rootfs/ chpasswd
 	echo "${MACHINENAME}" > ${CPATH}/${CNAME}/rootfs/etc/hostname
 	mkdir -p ${CPATH}/${CNAME}/rootfs/dev/net
-	chroot ${CPATH}/${CNAME}/rootfs/ /bin/bash -c '[ ! -e /dev/net/tun ] &&  /bin/mknod /dev/net/tun c 10 200'
+	chroot ${CPATH}/${CNAME}/rootfs/ /bin/bash -c '[ ! -e /dev/net/tun ] &&  /bin/mknod /dev/net/tun c 10 200 || echo > /dev/null'
 
 	# Config interfaces
 	printf "\n auto eth0\niface eth0 inet dhcp\n" >> ${CPATH}/${CNAME}/rootfs/etc/network/interfaces
@@ -149,7 +149,7 @@ container_configure: container_savefiles
 	chmod 1777 ${CPATH}/${CNAME}/rootfs/tmp
 
 	#Solving mySQL issues
-	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "chown -R mysql /var/lib/mysql"
+	#chroot ${CPATH}/${CNAME}/rootfs/ sh -c "chown -R mysql /var/lib/mysql"
 
 	#Change /dev/null permisions
 	chroot ${CPATH}/${CNAME}/rootfs/ sh -c "chmod 666 /dev/null"
