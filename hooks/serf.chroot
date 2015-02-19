@@ -22,6 +22,9 @@ EOF
 # Active DATABASE publish
 sed -i 's/DATABASE=.*$/DATABASE=serf/' $AVAHIPS
 
+# Active menu cDistro
+mv /var/local/cDistro/plug/menus/serf.lookfor.menu.php.disable /var/local/cDistro/plug/menus/serf.lookfor.menu.php
+
 # Update info
 mkdir -p /etc/cloudy
 curl -s https://api.github.com/repos/$COMMUNITY/$REPOSITORY/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${COMMUNITY}-${REPOSITORY}.sha
