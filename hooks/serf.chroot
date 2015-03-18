@@ -3,14 +3,16 @@ COMMUNITY=Clommunity
 REPOSITORY=package-serf
 SERFCONFIG="/etc/avahi-ps-serf.conf"
 AVAHIPS="/etc/avahi-ps.conf"
-
+ARCH="i386"
 GETURL="https://raw.githubusercontent.com/${COMMUNITY}/${REPOSITORY}/master/getgithub"
 ADDR="127.0.0.1:7373"
 BIND="5000"
 JOIN="10.139.40.82:5000"
 
+ARCH="i386"
+
 # Install
-curl $GETURL | sh -
+curl $GETURL | ARCH=${ARCH} sh -
 
 # Configure
 cat << EOF > $SERFCONFIG
@@ -20,7 +22,17 @@ SERF_JOIN=$JOIN
 EOF
 
 # Active DATABASE publish
-sed -i 's/DATABASE=.*$/DATABASE=serf/' $AVAHIPS
+if [ -f $AVAHIPS ]
+        then
+        sed -i 's/DATABASE=.*$/DATABASE=serf/' $AVAHIPS
+else
+        cat > $AVAHIPS << EOF
+ERRORS_PLUG="errors"
+EXECUTE_IN="memory"
+SAVE_SERVICE="none"
+DATABASE="serf"
+EOF
+fi
 
 # Active menu cDistro
 mv /var/local/cDistro/plug/menus/serf.lookfor.menu.php.disable /var/local/cDistro/plug/menus/serf.lookfor.menu.php
@@ -28,4 +40,3 @@ mv /var/local/cDistro/plug/menus/serf.lookfor.menu.php.disable /var/local/cDistr
 # Update info
 mkdir -p /etc/cloudy
 curl -s https://api.github.com/repos/$COMMUNITY/$REPOSITORY/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${COMMUNITY}-${REPOSITORY}.sha
-
