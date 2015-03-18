@@ -39,7 +39,7 @@ CDISTROCONF="/etc/cdistro.conf"
 # Remove getinconf-client
 if \$(dpkg-query -W --showformat='\${Status}\n' getinconf-client |grep -q "install ok installed")
 then
-   apt-get remove getinconf-client
+   apt-get -y remove getinconf-client
 fi
 
 # Remove cron system
