@@ -49,7 +49,8 @@ then
 fi
 
 # Active GETINCONF_IGNORE
-if [ \$(cat /etc/getinconf-client.conf|grep -qe "^GETINCONF_IGNORE=1\$";echo \$?) = 0 ]
+
+if [ "$(cat /etc/getinconf-client.conf|grep -e '^GETINCONF_IGNORE=1$'|wc -l)" -eq 0 ]
 then
    echo "GETINCONF_IGNORE=1" >> /etc/getinconf-client.conf
 fi
