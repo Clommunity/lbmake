@@ -73,6 +73,9 @@ add_packages: add_repos
 	done < packages
 
 hooks: add_packages
+	for f in hooks/*; do \
+		sed -i "s/^#env .*/ARCH=${ARCH} FLAVOUR=${FLAVOUR} DISTRIBUTION=${DISTRIBUTION} IMAGE=${IMAGE} INSTALL=${INSTALL} CNAME=${CNAME} MACHINENAME=${MACHINENAME}/" $$f; \
+	done
 	mkdir -p ${HOOKDIR}
 	cp hooks/* ${HOOKDIR}/
 

@@ -1,4 +1,7 @@
 #!/bin/sh
+
+#env ARCH
+
 COMMUNITY=Clommunity
 REPOSITORY=package-serf
 SERFCONFIG="/etc/avahi-ps-serf.conf"
