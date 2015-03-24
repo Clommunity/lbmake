@@ -3,6 +3,7 @@ CDISTROCONF=/etc/cdistro.conf
 SERF_CRON="/etc/cron.d/serf-reload"
 UNKNOWN_IP="Unknown"
 CDISTROCONF="/etc/cdistro.conf"
+SERFBIN=
 
 curl "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
 unzip cDistro.zip
