@@ -167,7 +167,8 @@ container_configure: container_savefiles
 	# Clear keys
 	rm -f ${CPATH}/${CNAME}/rootfs/etc/ssh/ssh_host_*
 	# Reconfigure keys
-	sed -i 's%^getinconf%[ ! -f /etc/ssh/ssh_host_dsa_key ] \&\& dpkg-reconfigure openssh-server\ngetinconf%' ${CPATH}/${CNAME}/rootfs/etc/rc.local 
+	# This is in rc.local from getinconf-hook
+	#sed -i 's%^getinconf%[ ! -f /etc/ssh/ssh_host_dsa_key ] \&\& dpkg-reconfigure openssh-server\ngetinconf%' ${CPATH}/${CNAME}/rootfs/etc/rc.local 
 
 	sync
 
