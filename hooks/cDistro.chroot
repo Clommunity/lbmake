@@ -1,4 +1,8 @@
 #!/bin/sh
+CDISTROCONF=/etc/cdistro.conf
+SERF_CRON="/etc/cron.d/serf-reload"
+UNKNOWN_IP="Unknown"
+CDISTROCONF="/etc/cdistro.conf"
 
 curl "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
 unzip cDistro.zip
@@ -6,8 +10,32 @@ cd cDistro-master
 make install
 cd ..
 rm -rf cDistro-master cDistro.zip
-sed -i -e 's/BINDIP="127.0.0.1"/BINDIP="0.0.0.0"/' /etc/cdistro.conf
+if $(fgrep -q "PORT_SSL" $CDISTROCONF)
+then
+   sed -i -e 's/BINDIP="0.0.0.0"/BINDIP="127.0.0.1"/' $CDISTROCONF
+else
+   sed -i -e 's/BINDIP="127.0.0.1"/BINDIP="0.0.0.0"/' $CDISTROCONF
+fi
 update-rc.d cdistro defaults
+
+# Remove cron system
+if [ -f /etc/cron.d/getinconf-client ]
+then
+   rm -f /etc/cron.d/getinconf-client
+fi
+
+# Active GETINCONF_IGNORE
+
+if [ "$(cat /etc/getinconf-client.conf|grep -e '^GETINCONF_IGNORE=1$'|wc -l)" -eq 0 ]
+then
+   echo "GETINCONF_IGNORE=1" >> /etc/getinconf-client.conf
+fi
+
+if [ ! -f $SERF_CRON ]
+then
+   echo "0 *   * * *   root    [ -x /etc/init.d/serf ] && /etc/init.d/serf start > /dev/null 2>&1" > $SERF_CRON
+fi
+
 
 # Update info
 COMMUNITY=Clommunity
