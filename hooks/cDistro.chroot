@@ -37,6 +37,16 @@ then
    echo "0 *   * * *   root    [ -x /etc/init.d/serf ] && /etc/init.d/serf start > /dev/null 2>&1" > $SERF_CRON
 fi
 
+# Remove some files
+rmfiles="plug/controllers/caracal-api.php plug/controllers/caracal.php plug/controllers/gvod.php plug/controllers/sweep.php plug/menus/caracal-api.menu.php plug/menus/caracal.menu.php plug/menus/gvod.menu.php plug/menus/sweep.menu.php"
+for i in $rmfiles
+do
+	file="/var/local/cDistro/$i"
+  if [ -f $file ]
+	then
+		rm -f $file
+	fi
+done
 
 # Update info
 COMMUNITY=Clommunity
