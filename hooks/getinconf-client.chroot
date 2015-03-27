@@ -74,7 +74,7 @@ done
 
 if [ "\$IP" != "\$UNKNOWN_IP" ]
 then
-    /etc/init.d/serf start
+    /etc/init.d/serf start &
 fi
 
 if \$(fgrep -q "PORT_SSL" \$CDISTROCONF)
