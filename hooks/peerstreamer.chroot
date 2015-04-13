@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ARCH=`uname -m`
+
+curl "https://codeload.github.com/Clommunity/build-peerstreamer/zip/master" > peerstreamer.zip
+unzip peerstreamer.zip
+
+# Installing peerstreamer according to CPU architecture
+cp build-peerstreamer/bin/$ARCH /opt/peerstreamer/
+
+# Removing files
+rm -rf peerstreamer.zip build-peerstreamer
+
+# Update info
+COMMUNITY=Clommunity
+REPOSITORY=build-peerstreamer
+mkdir -p /etc/cloudy
+curl -s https://api.github.com/repos/$COMMUNITY/$REPOSITORY/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${COMMUNITY}-${REPOSITORY}.sha
