@@ -1,12 +1,17 @@
 #!/bin/sh
 
 # Configure
-cat << EOF | getinconf-client configure
-http://10.139.40.84/index.php
-demo
-demo
-eth0
-n
+cat << EOF > /etc/getinconf-client.conf
+#!/bin/sh
+
+# Automatically generate file with lbmake
+GTC_SERVER_URL=http://10.139.40.84/index.php
+NETWORK_NAME=guif
+NETWORK_KEY=guifi
+INTERNAL_DEV=eth0
+# POST=665
+# GETINCONF_IGNORE=1
+
 EOF
  
 # Execute first time.
