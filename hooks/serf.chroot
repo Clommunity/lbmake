@@ -6,13 +6,11 @@ COMMUNITY=Clommunity
 REPOSITORY=package-serf
 SERFCONFIG="/etc/avahi-ps-serf.conf"
 AVAHIPS="/etc/avahi-ps.conf"
-ARCH="i386"
+[ -z "$ARCH" ] && ARCH="i386"
 GETURL="https://raw.githubusercontent.com/${COMMUNITY}/${REPOSITORY}/master/getgithub"
 ADDR="127.0.0.1:7373"
 BIND="5000"
 JOIN="10.139.40.82:5000"
-
-ARCH="i386"
 
 # Install
 curl $GETURL | ARCH=${ARCH} sh -
