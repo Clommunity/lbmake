@@ -6,7 +6,7 @@ cat << EOF > /etc/getinconf-client.conf
 
 # Automatically generate file with lbmake
 GTC_SERVER_URL=http://10.139.40.84/index.php
-NETWORK_NAME=guif
+NETWORK_NAME=guifi
 NETWORK_KEY=guifi
 INTERNAL_DEV=eth0
 # POST=665
