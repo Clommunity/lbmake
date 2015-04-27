@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ARCH=`uname -m`
+[ -z "$ARCH" ] && ARCH=`uname -m`
 
 curl "https://codeload.github.com/Clommunity/build-peerstreamer/zip/master" > peerstreamer.zip
 unzip peerstreamer.zip
