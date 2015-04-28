@@ -6,7 +6,7 @@ curl "https://codeload.github.com/Clommunity/build-peerstreamer/zip/master" > pe
 unzip peerstreamer.zip
 
 # Installing peerstreamer according to CPU architecture
-cp build-peerstreamer-master/bin/$ARCH /opt/peerstreamer/
+cp build-peerstreamer-master/bin/$ARCH/* /opt/peerstreamer/
 
 # Removing files
 rm -rf peerstreamer.zip build-peerstreamer
