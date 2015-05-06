@@ -13,7 +13,7 @@ INTERNAL_DEV=eth0
 # GETINCONF_IGNORE=1
 
 EOF
- 
+
 # Execute first time.
 #sed -i -e 's/^exit 0/getinconf-client install\nexit 0/' /etc/rc.local
 
@@ -39,7 +39,7 @@ ISSUE="/etc/issue"
 WAIT_TIME=100
 SERF_CRON="/etc/cron.d/serf-reload"
 UNKNOWN_IP="Unknown"
-CDISTROCONF="/etc/cdistro.conf"
+CLOUDYCONF="/etc/cloudy/cloudy.conf"
 
 # Remove getinconf-client
 if \$(dpkg-query -W --showformat='\${Status}\n' getinconf-client |grep -q "install ok installed")
@@ -82,7 +82,7 @@ then
     /etc/init.d/serf start &
 fi
 
-if \$(fgrep -q "PORT_SSL" \$CDISTROCONF)
+if \$(fgrep -q "PORT_SSL" \$CLOUDYCONF)
 then
    GUIURL="https://\${IP}:7443/"
 else

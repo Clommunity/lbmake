@@ -1,8 +1,7 @@
 #!/bin/sh
-CDISTROCONF=/etc/cdistro.conf
 SERF_CRON="/etc/cron.d/serf-reload"
 UNKNOWN_IP="Unknown"
-CDISTROCONF="/etc/cdistro.conf"
+CLOUDYCONF="/etc/cloudy/cloudy.conf"
 SERFBIN=
 
 curl "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
@@ -11,11 +10,11 @@ cd cDistro-master
 make install
 cd ..
 rm -rf cDistro-master cDistro.zip
-if $(fgrep -q "PORT_SSL" $CDISTROCONF)
+if $(fgrep -q "PORT_SSL" $CLOUDYCONF)
 then
-   sed -i -e 's/BINDIP="0.0.0.0"/BINDIP="127.0.0.1"/' $CDISTROCONF
+   sed -i -e 's/BINDIP="0.0.0.0"/BINDIP="127.0.0.1"/' $CLOUDYCONF
 else
-   sed -i -e 's/BINDIP="127.0.0.1"/BINDIP="0.0.0.0"/' $CDISTROCONF
+   sed -i -e 's/BINDIP="127.0.0.1"/BINDIP="0.0.0.0"/' $CLOUDYCONF
 fi
 update-rc.d cdistro defaults
 
