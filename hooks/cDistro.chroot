@@ -10,12 +10,19 @@ cd cDistro-master
 make install
 cd ..
 rm -rf cDistro-master cDistro.zip
+
 if $(fgrep -q "PORT_SSL" $CLOUDYCONF)
 then
    sed -i -e 's/BINDIP="0.0.0.0"/BINDIP="127.0.0.1"/' $CLOUDYCONF
 else
    sed -i -e 's/BINDIP="127.0.0.1"/BINDIP="0.0.0.0"/' $CLOUDYCONF
 fi
+
+if [ -f /etc/cdistro.conf ]
+then
+   mv -f /etc/cdistro.conf $CLOUDYCONF
+fi
+
 update-rc.d cdistro defaults
 
 # Remove cron system
