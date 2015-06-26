@@ -4,7 +4,7 @@ UNKNOWN_IP="Unknown"
 CLOUDYCONF="/etc/cloudy/cloudy.conf"
 SERFBIN=
 
-curl "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
+curl -k "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
 unzip cDistro.zip
 cd cDistro-master
 make install
