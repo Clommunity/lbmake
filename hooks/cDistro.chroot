@@ -58,5 +58,5 @@ done
 COMMUNITY=Clommunity
 REPOSITORY=cDistro
 mkdir -p /etc/cloudy
-curl -ks https://api.github.com/repos/$COMMUNITY/$REPOSITORY/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${COMMUNITY}-${REPOSITORY}.sha
+curl -k https://api.github.com/repos/$COMMUNITY/$REPOSITORY/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${COMMUNITY}-${REPOSITORY}.sha
 
