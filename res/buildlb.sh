@@ -26,7 +26,7 @@ gitpull(){
 	# If not exist WORKSPACE/.git need clone
 	if [ ! -d "${GP}${WORKSPACE}/.git" ];
 	then
-		git clone -b ${GITBRANCH} ${REPOSITORY} ${GP}${WORKSPACE}
+		git clone -b ${GITBRANCH} ${REPOSITORY} ${GP}${WORKSPACE}_${GITBRANCH}
 	else
 		git --git-dir=${GP}${WORKSPACE}/.git pull
 	fi
