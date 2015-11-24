@@ -7,6 +7,7 @@ GP=/var/www/
 IMAGE_PATH=images
 WORKSPACE=lbmake
 REPOSITORY=https://github.com/Clommunity/lbmake
+GITBRANCH=jessie-i386
 IMAGE_NAME=cloudy
 IMAGE_EXT=iso
 LBIMAGE_NAME=binary.hybrid.iso
@@ -17,7 +18,7 @@ SUBDIR=unstable
 BACKUPDAYS=7
 
 make_dirs(){
-	mkdir -p ${GP}${IMAGE_PATH}/${SUBDIR}
+	mkdir -p ${GP}${IMAGE_PATH}/${SUBDIR}_${GITBRANCH}
 	mkdir -p ${GP}${IMAGE_PATH}/${SUBDIR}/old
 }
 
@@ -25,7 +26,7 @@ gitpull(){
 	# If not exist WORKSPACE/.git need clone
 	if [ ! -d "${GP}${WORKSPACE}/.git" ];
 	then
-		git clone ${REPOSITORY} ${GP}${WORKSPACE}
+		git clone -b ${GITBRANCH} ${REPOSITORY} ${GP}${WORKSPACE}
 	else
 		git --git-dir=${GP}${WORKSPACE}/.git pull
 	fi
@@ -51,7 +52,7 @@ make_readme(){
 	echo
 	echo "Packages:"
 	cd ${GP}${WORKSPACE} && make describe
-	echo "Builder: ${REPOSITORY} (hash:$(gitversion))"
+	echo "Builder: ${REPOSITORY} , ${GITBRANCH} branch (hash:$(gitversion))"
 	echo
 }
 
