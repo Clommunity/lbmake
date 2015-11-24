@@ -1,8 +1,8 @@
 # Makefile
-DESTDIR ?= devel
+DESTDIR ?= stable-i386
 ARCH ?= i386
 FLAVOUR ?= 686-pae
-DISTRIBUTION ?= wheezy
+DISTRIBUTION ?= jessie
 IMAGE ?= iso-hybrid # or iso, hdd, tar or netboot
 INSTALL ?= live # or businesscard, netinst, cdrom...
 AREAS ?= "main contrib" # non-free
@@ -10,7 +10,7 @@ CPATH ?= /var/lib/lxc
 CNAME ?= cloudy
 MACGEN ?= $(shell echo $$(date +%N))
 MACADDR ?= $(shell echo $$(echo ${MACGEN}|md5sum|sed 's/^\(..\)\(..\)\(..\)\(..\)\(..\).*$$/02:\1:\2:\3:\4:\5/'))
-ROOTPWD ?= root
+ROOTPWD ?= Cloudy
 MACHINENAME ?= cloudy
 CEXTENSION ?= container.tar.gz
 
@@ -20,7 +20,7 @@ PKGDIR := ${DESTDIR}/config/package-lists
 HOOKDIR := ${DESTDIR}/config/hooks
 CUSTDIR := ${DESTDIR}/config/custom
 
-NAME := Clommunity distro
+NAME := Cloudy - A community networking cloud in a box
 SPLASH_TITLE := ${NAME}
 SPLASH_SUBTITLE := ${ARCH} ${FLAVOUR}
 TIMESTAMP := $(shell date -u '+%d %b %Y %R %Z')
