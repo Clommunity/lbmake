@@ -24,25 +24,25 @@ make_dirs(){
 
 gitpull(){
 	# If not exist WORKSPACE/.git need clone
-	if [ ! -d "${GP}${WORKSPACE}/.git" ];
+	if [ ! -d "${GP}${WORKSPACE}_${GITBRANCH}/.git" ];
 	then
 		git clone -b ${GITBRANCH} ${REPOSITORY} ${GP}${WORKSPACE}_${GITBRANCH}
 	else
-		git --git-dir=${GP}${WORKSPACE}/.git pull
+		git --git-dir=${GP}${WORKSPACE}_${GITBRANCH}/.git pull
 	fi
 }	
 
 gitversion(){
-	echo $(git --git-dir=${GP}${WORKSPACE}/.git rev-parse --short HEAD)
+	echo $(git --git-dir=${GP}${WORKSPACE}_${GITBRANCH}/.git rev-parse --short HEAD)
 }
 
 clean_workspace(){
-	cd ${GP}${WORKSPACE} && make clean
+	cd ${GP}${WORKSPACE}_${GITBRANCH} && make clean
 }
 
 make_workspace(){
-	cd ${GP}${WORKSPACE} && make all	
-	cd ${GP}${WORKSPACE} && CNAME=${IMAGE_NAME} make container_tar
+	cd ${GP}${WORKSPACE}_${GITBRANCH} && make all	
+	cd ${GP}${WORKSPACE}_${GITBRANCH} && CNAME=${IMAGE_NAME} make container_tar
 }
 
 make_readme(){
@@ -51,7 +51,7 @@ make_readme(){
 	echo "${IMAGE_NAME}.${IMAGE_EXT} (${MD5NF})"
 	echo
 	echo "Packages:"
-	cd ${GP}${WORKSPACE} && make describe
+	cd ${GP}${WORKSPACE}_${GITBRANCH} && make describe
 	echo "Builder: ${REPOSITORY} , ${GITBRANCH} branch (hash:$(gitversion))"
 	echo
 }
@@ -74,12 +74,12 @@ md5_compare(){
 ACTIMG=${GP}${IMAGE_PATH}/${SUBDIR}/${IMAGE_NAME}.${IMAGE_EXT}
 ACTREADME=${GP}${IMAGE_PATH}/${SUBDIR}/${IMAGE_NAME}.README
 ACTCONTAINER=${GP}${IMAGE_PATH}/${SUBDIR}/${IMAGE_NAME}.container.tar.gz
-BUILDIMG=${GP}${WORKSPACE}/${LBWORKSPACE}/${LBIMAGE_NAME}
-BUILDCONTAINER=${GP}${WORKSPACE}/${LBWORKSPACE}/${IMAGE_NAME}.container.tar.gz
+BUILDIMG=${GP}${WORKSPACE}_${GITBRANCH}/${LBWORKSPACE}/${LBIMAGE_NAME}
+BUILDCONTAINER=${GP}${WORKSPACE}_${GITBRANCH}/${LBWORKSPACE}/${IMAGE_NAME}.container.tar.gz
 
 
 make_dirs
-[ -d "${GP}${WORKSPACE}" ] && clean_workspace
+[ -d "${GP}${WORKSPACE}_${GITBRANCH}" ] && clean_workspace
 gitpull
 make_workspace
 
