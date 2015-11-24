@@ -1,5 +1,5 @@
 # Makefile
-DESTDIR ?= stable-i386
+DESTDIR ?= devel
 ARCH ?= i386
 FLAVOUR ?= 686-pae
 DISTRIBUTION ?= jessie
