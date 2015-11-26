@@ -101,7 +101,7 @@ container_prepare:
 	mkdir -p ${CPATH}/${CNAME}/
 
 container_mount: container_prepare
-	mount -o loop ${DESTDIR}/binary.hybrid.iso ${DESTDIR}/tmp/
+	mount -o loop ${DESTDIR}/live-image-${ARCH}.hybrid.iso ${DESTDIR}/tmp/
 	mount ${DESTDIR}/tmp/live/filesystem.squashfs ${DESTDIR}/mntsquash
 
 container_configfile: 
