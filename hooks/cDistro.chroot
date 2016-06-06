@@ -2,14 +2,15 @@
 SERF_CRON="/etc/cron.d/serf-reload"
 UNKNOWN_IP="Unknown"
 CLOUDYCONF="/etc/cloudy/cloudy.conf"
+BRANCH="master"
 SERFBIN=
 
-curl -k "https://codeload.github.com/Clommunity/cDistro/zip/master" > cDistro.zip
+curl -k "https://codeload.github.com/Clommunity/cDistro/zip/${BRANCH}" > cDistro.zip
 unzip cDistro.zip
-cd cDistro-master
+cd cDistro-${BRANCH}
 make install
 cd ..
-rm -rf cDistro-master cDistro.zip
+rm -rf cDistro-${BRANCH} cDistro.zip
 
 if $(fgrep -q "PORT_SSL" $CLOUDYCONF)
 then
