@@ -20,4 +20,5 @@ rm -rf ${NAME}.zip ${NAME}-master
 
 # Update info
 mkdir -p /etc/cloudy
+mkdir -p /etc/cloudy/docker-compose
 curl -s https://api.github.com/repos/$GH_USER/$GH_REPO/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${GH_USER}-${GH_REPO}.sha
