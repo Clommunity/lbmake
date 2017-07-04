@@ -1,0 +1,24 @@
+#!/bin/bash
+
+ARCH ?= $(shell uname -m|sed 's/i.86/i386/'|sed 's/^arm.*/arm/')
+
+GH_USER=Clommunity
+GH_REPO=package-ipfs
+NAME=ipfs
+
+curl "https://codeload.github.com/${GH_USER}/${GH_REPO}/zip/master" > ${GH_REPO}.zip
+unzip ${GH_REPO}.zip
+cd ${GH_REPO}-master/
+
+# Installing IPFS.io according to CPU architecture
+mkdir -p /usr/local/bin
+cp ${GH_REPO}/bin/${ARCH}/${NAME} /usr/local/bin/
+chmod +x /usr/local/bin/${NAME}
+
+# Removing files
+rm -rf ${NAME}.zip ${NAME}-master
+
+# Update info
+mkdir -p /etc/cloudy
+mkdir -p /etc/cloudy/ipfs/
+curl -s https://api.github.com/repos/$GH_USER/$GH_REPO/git/refs/heads/master | grep 'sha'|awk -F':' '{print $2}'|awk -F'"' '{print $2}' > /etc/cloudy/${GH_USER}-${GH_REPO}.sha
