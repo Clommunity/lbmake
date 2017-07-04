@@ -1,10 +1,16 @@
 #!/bin/bash
 
-ARCH ?= $(shell uname -m|sed 's/i.86/i386/'|sed 's/^arm.*/arm/')
+[ -z "$ARCH" ] && ARCH=$(uname -m | sed 's/i.86/i386/' | sed 's/^arm.*/arm/' | sed 's/.*64/amd64/')
+
+if [ "$ARCH" == "amd64" ]
+then
+  ARCH=x86_64
+fi
 
 GH_USER=Clommunity
 GH_REPO=package-ipfs
-NAME=ipfs
+BZIP2NAME="ipfs.bz2"
+BINNAME=ipfs
 
 curl "https://codeload.github.com/${GH_USER}/${GH_REPO}/zip/master" > ${GH_REPO}.zip
 unzip ${GH_REPO}.zip
@@ -12,8 +18,9 @@ cd ${GH_REPO}-master/
 
 # Installing IPFS.io according to CPU architecture
 mkdir -p /usr/local/bin
-cp ${GH_REPO}/bin/${ARCH}/${NAME} /usr/local/bin/
-chmod +x /usr/local/bin/${NAME}
+cp bin/${ARCH}/${BZIP2NAME} /usr/local/bin/
+bunzip2 /usr/local/bin/${BZIP2NAME}
+chmod +x /usr/local/bin/${BINyNAME}
 
 # Removing files
 rm -rf ${NAME}.zip ${NAME}-master

@@ -1,22 +1,28 @@
 #!/bin/bash
 
-ARCH ?= $(shell uname -m|sed 's/i.86/i386/'|sed 's/^arm.*/arm/')
+[ -z "$ARCH" ] && ARCH=$(uname -m | sed 's/i.86/i386/' | sed 's/^arm.*/arm/' | sed 's/.*64/amd64/')
+
+if [ "$ARCH" = "amd64" ]; then
+ ARCH=x86_64
+fi
 
 GH_USER=Clommunity
 GH_REPO=package-docker-compose
 NAME=docker-compose
 
 curl "https://codeload.github.com/${GH_USER}/${GH_REPO}/zip/master" > ${GH_REPO}.zip
-unzip ${GH_REPO}.zip 
+unzip ${GH_REPO}.zip
 cd ${GH_REPO}-master/
 
 # Installing docker-compose according to CPU architecture
+echo
 mkdir -p /usr/local/bin
-cp ${GH_REPO}/bin/${ARCH}/${NAME} /usr/local/bin/
+cp bin/${ARCH}/${NAME} /usr/local/bin/
 chmod +x /usr/local/bin/${NAME}
 
 # Removing files
-rm -rf ${NAME}.zip ${NAME}-master
+cd ..
+rm -rf ${GH_REPO}.zip ${GH_REPO}-master
 
 # Update info
 mkdir -p /etc/cloudy
