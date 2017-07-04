@@ -2,9 +2,8 @@
 
 [ -z "$ARCH" ] && ARCH=$(uname -m | sed 's/i.86/i386/' | sed 's/^arm.*/arm/' | sed 's/.*64/amd64/')
 
-if [ "$ARCH" == "amd64" ]
-then
-  ARCH=x86_64
+if [ "$ARCH" = "amd64" ]; then
+ ARCH=x86_64
 fi
 
 GH_USER=Clommunity
@@ -23,7 +22,7 @@ bunzip2 /usr/local/bin/${BZIP2NAME}
 chmod +x /usr/local/bin/${BINyNAME}
 
 # Removing files
-rm -rf ${NAME}.zip ${NAME}-master
+rm -rf ${GH_REPO}.zip ${GH_REPO}-master
 
 # Update info
 mkdir -p /etc/cloudy
