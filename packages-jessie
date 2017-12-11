@@ -1,6 +1,5 @@
 ssh:	openssh-server openssh-client
-tinc:	getinconf-client
-avahi:	curl unzip make avahi-utils jq
+system:	curl unzip make jq
 tahoe:	tahoe-lafs
 nodejs:	python2.7 g++ make checkinstall
 locale:	locales
