@@ -4,5 +4,5 @@ avahi:	curl unzip make avahi-utils jq
 tahoe:	tahoe-lafs
 nodejs:	python2.7 g++ make checkinstall
 locale:	locales
-cDis:	php5 libssh2-php php5-sqlite php5-curl
+cDistro:	php5 libssh2-php php5-sqlite php5-curl
 webdav:	libapache2-mod-encoding
