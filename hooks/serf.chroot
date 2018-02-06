@@ -11,6 +11,7 @@ GETURL="https://raw.githubusercontent.com/${COMMUNITY}/${REPOSITORY}/master/getg
 ADDR="127.0.0.1:7373"
 BIND="5000"
 JOIN="10.139.40.122:5000"
+MENUFILE="/var/local/cDistro/plug/menus/r0101.serf.lookfor.menu.php"
 
 # Install
 curl $GETURL | ARCH=${ARCH} sh -
@@ -35,8 +36,9 @@ DATABASE="serf"
 EOF
 fi
 
-# Active menu cDistro
-mv /var/local/cDistro/plug/menus/serf.lookfor.menu.php.disable /var/local/cDistro/plug/menus/serf.lookfor.menu.php
+# Activate menu cDistro
+[ -f "{$MENUFILE}.disable" ]
+mv "$MENUFILE.disable" "$MENUFILE"
 
 # Update info
 mkdir -p /etc/cloudy
