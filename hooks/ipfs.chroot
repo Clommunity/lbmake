@@ -1,25 +1,18 @@
 #!/bin/bash
 
-[ -z "$ARCH" ] && ARCH=$(uname -m | sed 's/i.86/i386/' | sed 's/^arm.*/arm/' | sed 's/.*64/amd64/')
-
-if [ "$ARCH" = "amd64" ]; then
- ARCH=x86_64
-fi
-
 GH_USER=Clommunity
 GH_REPO=package-ipfs
 BZIP2NAME="ipfs.bz2"
 BINNAME=ipfs
+BRANCH=master
 
-curl "https://codeload.github.com/${GH_USER}/${GH_REPO}/zip/master" > ${GH_REPO}.zip
+curl "https://codeload.github.com/${GH_USER}/${GH_REPO}/zip/${BRANCH}" > ${GH_REPO}.zip
 unzip ${GH_REPO}.zip
-cd ${GH_REPO}-master/
+cd ${GH_REPO}-${BRANCH}/
 
-# Installing IPFS.io according to CPU architecture
-mkdir -p /usr/local/bin
-cp bin/${ARCH}/${BZIP2NAME} /usr/local/bin/
-bunzip2 /usr/local/bin/${BZIP2NAME}
-chmod +x /usr/local/bin/${BINyNAME}
+make install
+
+cd ..
 
 # Removing files
 rm -rf ${GH_REPO}.zip ${GH_REPO}-master
