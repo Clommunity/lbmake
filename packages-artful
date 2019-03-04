@@ -3,5 +3,5 @@ system:	curl unzip make jq
 tahoe:	tahoe-lafs
 nodejs:	python2.7 g++ make checkinstall
 locale:	locales
-cDistro:	php7.0 php-ssh2 php-sqlite3 php-curl
+cDistro:	php php-ssh2 php-sqlite3 php-curl
 webdav:	libapache2-mod-encoding
